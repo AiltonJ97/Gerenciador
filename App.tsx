@@ -1,13 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, } from 'react-native';
+import { LoginScreen } from './src/screens/login';
+import { Home } from './src/screens/homepage';
+import { Criar } from './src/screens/criarDespesas';
+import Routes from './src/routes';
+import { Cadastro } from './src/screens/cadastrar';
+import StackRoutes from './src/routes/stack.routes';
+import TabRoutes from './src/routes/tab.routes';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  return (<StackRoutes/>);
 }
 
 const styles = StyleSheet.create({
