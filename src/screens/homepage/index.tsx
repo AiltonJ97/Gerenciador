@@ -1,32 +1,52 @@
 import * as React from 'react';
-import { ViewBase } from 'react-native';
-import { View, StyleSheet, Text} from 'react-native';
-import { LoginScreen } from '../login';
-
+import { StatusBar } from 'react-native';
+import { StyleSheet, Text} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView } from 'react-native';
 
 export interface HomeProps {
 }
 
 export function Home (props: HomeProps) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.texto}>Home</Text>
-      </View>
+      <SafeAreaView style={styles.container}>
+        <StatusBar 
+          barStyle={'default'}
+        />
+        <Text style={{fontSize: 30}}>Home</Text>
+        <ScrollView style={styles.scrollView}>
+          <Text style={styles.texto}>1º Item</Text>
+          <Text style={styles.texto}>2º Item</Text>
+          <Text style={styles.texto}>3º Item</Text>
+          <Text style={styles.texto}>4º Item</Text>
+          <Text style={styles.texto}>5º Item</Text>
+          <Text style={styles.texto}>6º Item</Text>
+          <Text style={styles.texto}>7º Item</Text>
+          <Text style={styles.texto}>8º Item</Text>
+          <Text style={styles.texto}>9º Item</Text>
+          <Text style={styles.texto}>10º Item</Text>
+        </ScrollView>
+        </SafeAreaView>
     );
 }
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100%',
-        width: '100%',
-        backgroundColor: '#9CD53F'
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      backgroundColor: '#9CD53F'
     },
     texto: {
-        marginTop: 50,
+        marginTop: 5,
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: 30,
-    }
+        fontSize: 25,
+    },
+    scrollView: {
+      flexDirection: 'row',
+      width: '100%',
+      backgroundColor: 'white',
+      marginHorizontal: 20,
+    },
 });
 

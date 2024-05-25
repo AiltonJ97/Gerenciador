@@ -2,8 +2,6 @@ import * as React from 'react';
 import { View, Text, StatusBar, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather'
 
-
-
 export interface CriarProps {
 }
 

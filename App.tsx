@@ -9,7 +9,7 @@ import StackRoutes from './src/routes/stack.routes';
 import TabRoutes from './src/routes/tab.routes';
 
 export default function App() {
-  return (<StackRoutes/>);
+  return (<TabRoutes/>);
 }
 
 const styles = StyleSheet.create({

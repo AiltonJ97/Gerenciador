@@ -1,15 +1,20 @@
-import { useNavigation } from '@react-navigation/native';
+import 'react-native-gesture-handler';
 import * as React from 'react';
 
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
 import StackRoutes from '../../routes/stack.routes';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Button } from '@rneui/themed';
+import { HomeProps } from '../homepage';
 
 export interface LoginProps {
 }
 
 export function LoginScreen (props: LoginProps) {  
+
   return (
-      <View style={styles.container}>
+      <SafeAreaView>
+        <View style={styles.container}>
         
         <Image 
           source={require('./assets/inter.png')}
@@ -27,18 +32,17 @@ export function LoginScreen (props: LoginProps) {
           <Text style={{fontWeight: '800', color: 'white'}}>Senha: </Text>
           <TextInput placeholder='Digite sua senha' placeholderTextColor={'white'}/>
         </View>
-        
-        <TouchableOpacity style={styles.button}
-        onPress={() => }>
+
+        <TouchableOpacity style={styles.button}>
           <Text style={{fontWeight: '800'}}>Entrar</Text>
         </TouchableOpacity>
         
         <TouchableOpacity style={styles.buttonCria}>
           <Text style={{fontWeight: 'bold'}}>Criar nova Conta</Text>
-        </TouchableOpacity>
-      
+        </TouchableOpacity>      
       </View>
-    );
+      </SafeAreaView>
+   );
 }
 
 const styles = StyleSheet.create({
