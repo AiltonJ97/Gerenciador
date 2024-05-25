@@ -1,21 +1,35 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
+import { router } from 'expo-router';
 
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
-import StackRoutes from '../../routes/stack.routes';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button } from '@rneui/themed';
-import { HomeProps } from '../homepage';
-
+import { View, Text ,StyleSheet, Image, TextInput, TouchableOpacity, Button} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 export interface LoginProps {
 }
 
-export function LoginScreen (props: LoginProps) {  
+
+
+export default function LoginScreen (props: LoginProps) {  
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  
+  const loginname = 'ailton'
+
+  const handleLogin = () => {
+    if (email === loginname && password === '123') {
+      router.push('homepage');
+    } else {
+      alert('Falha no login!! \n' + 'E-mail ou senha incorretos');
+    }
+  };
+
 
   return (
-      <SafeAreaView>
-        <View style={styles.container}>
-        
+    <KeyboardAwareScrollView
+      contentContainerStyle={styles.container}
+      resetScrollToCoords={{ x: 0, y: 0 }}
+      scrollEnabled={false}
+    >        
         <Image 
           source={require('./assets/inter.png')}
           style={styles.logo}
@@ -24,24 +38,35 @@ export function LoginScreen (props: LoginProps) {
         <Text style={styles.titulo}>Seja Bem-Vindo</Text>
         
         <View style={styles.texto}>
-          <Text style={{ fontWeight: '800', color: 'white'}}>Login: </Text>
-          <TextInput placeholder='Digite seu login' placeholderTextColor={'white'}/>
+          <TextInput 
+            placeholder='Digite seu login'
+            placeholderTextColor={'white'}
+            value={email}
+            onChangeText={setEmail}
+            autoCapitalize='none'
+            keyboardType='email-address'
+            style={{width: '80%'}}
+          />
         </View>
         
         <View style={styles.texto}>
-          <Text style={{fontWeight: '800', color: 'white'}}>Senha: </Text>
-          <TextInput placeholder='Digite sua senha' placeholderTextColor={'white'}/>
+          <TextInput
+          placeholder='Digite sua senha'
+          placeholderTextColor={'white'}
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          style={{width: '80%'}}
+        />
         </View>
-
-        <TouchableOpacity style={styles.button}>
-          <Text style={{fontWeight: '800'}}>Entrar</Text>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text>Entrar</Text>
         </TouchableOpacity>
         
         <TouchableOpacity style={styles.buttonCria}>
           <Text style={{fontWeight: 'bold'}}>Criar nova Conta</Text>
         </TouchableOpacity>      
-      </View>
-      </SafeAreaView>
+      </KeyboardAwareScrollView>  
    );
 }
 

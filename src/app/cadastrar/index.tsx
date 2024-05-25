@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, StatusBar, TextInput, TouchableOpacity } from 'react-native';
 
+
 export interface CadastroProps {
 }
 
-export function Cadastro (props: CadastroProps) {
+
+
+export default function Cadastro (props: CadastroProps) {
     return (
       <View style={styles.conteiner}>
         <StatusBar
-            barStyle={'default'}
+            barStyle={'light-content'}
         />
         <View style={styles.top}>
             <Text style={styles.texto1}>Cadastro</Text>
@@ -37,7 +40,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     top: {
-       backgroundColor: '#83D53F',
+       marginTop: 10, 
+       backgroundColor: 'white',
        width:'100%',
        marginBottom: 60,
     },
@@ -52,7 +56,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     texto1: {
-       backgroundColor:'#83D53F',
+       backgroundColor:'#9CD53F',
        fontSize: 30,
        width: '100%',
        fontWeight: '600',

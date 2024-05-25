@@ -5,7 +5,7 @@ import Feather from 'react-native-vector-icons/Feather'
 export interface CriarProps {
 }
 
-export function Criar (props: CriarProps) {
+export default function Criar (props: CriarProps) {
   return (
     <View style={styles.conteiner}>
       <StatusBar
@@ -15,21 +15,25 @@ export function Criar (props: CriarProps) {
         <TouchableOpacity>
           <Feather name='arrow-left' size={30}/>
         </TouchableOpacity>
-        <Text style={styles.texto}>Criar Despesas</Text>
+        <Text style={{fontSize: 30}}>Criar Despesas</Text>
       </View>
-      <TextInput style={styles.input} placeholder='Valor R$0,00'/>
-      <TextInput style={styles.input} placeholder='Vencimento'/>
-      <TouchableOpacity style={styles.button}>
-        <Text>Salvar</Text>
-      </TouchableOpacity>
+      <View>
+        <TextInput style={styles.input} placeholder='Valor R$0,00'/>
+        <TextInput style={styles.input} placeholder='Vencimento'/>
+        <TouchableOpacity style={styles.button}>
+          <Text>Salvar</Text>
+        </TouchableOpacity>
+      </View>  
     </View>
   );
 }
 
 const styles = StyleSheet.create({ 
   conteiner:{
-    flex: 1,
-    alignItems: "center",
+        flex: 1,
+        alignItems: "center",
+        justifyContent: 'flex-start',
+        backgroundColor: '#9CD53F',
   },
   texto: {
     textAlign: 'center',
