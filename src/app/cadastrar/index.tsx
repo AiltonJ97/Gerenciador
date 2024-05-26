@@ -1,13 +1,24 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, StatusBar, TextInput, TouchableOpacity } from 'react-native';
-
+import { View, Text, StyleSheet, StatusBar, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { router } from 'expo-router';
+import { auth } from '../config/firebase-config'
 
 export interface CadastroProps {
 }
 
-
+//Função do cadastro de usuário
+    const handleCadastro = async({email, senha, nome, idade}:any) => {
+         await createUserWithEmailAndPassword(auth, email, senha)
+             .then(() => router.back())
+             .catch(erro => Alert.alert('Erro', 'Não foi possivel criar o usuário, tente novamente'))
+    }
 
 export default function Cadastro (props: CadastroProps) {
+    const [email, setEmail] = React.useState('');
+    const [senha, setsenha] = React.useState('');
+
+
     return (
       <View style={styles.conteiner}>
         <StatusBar
@@ -26,7 +37,7 @@ export default function Cadastro (props: CadastroProps) {
             <View style={styles.texto}>
                 <TextInput placeholder='Repita sua senha' placeholderTextColor={'black'} style={{fontSize: 20}}/>
             </View>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => handleCadastro}>
                 <Text style={{fontWeight: '800', fontSize: 25}}>Cadastrar</Text>
             </TouchableOpacity>
         </View>

@@ -1,35 +1,41 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
 import { router } from 'expo-router';
+import { auth } from '../config/firebase-config'
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 import { View, Text ,StyleSheet, Image, TextInput, TouchableOpacity, Button} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 export interface LoginProps {
 }
 
 
-
 export default function LoginScreen (props: LoginProps) {  
   const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [senha, setsenha] = React.useState('');
   
-  const loginname = 'ailton'
+  //cria um usuário usando email e senha
+createUserWithEmailAndPassword(auth, email, senha)
+          //Opcionalmente para saber se criou com sucesso
+          .then(usuario => console.log('usuario criado'))
+          //Opcionalmente para se falhou ao criar usuário
+          .catch(error => console.log('Não criou usuário'))
 
   const handleLogin = () => {
-    if (email === loginname && password === '123') {
+    if (email === email && senha === '123') {
       router.push('homepage');
     } else {
       alert('Falha no login!! \n' + 'E-mail ou senha incorretos');
     }
   };
 
-
   return (
     <KeyboardAwareScrollView
       contentContainerStyle={styles.container}
       resetScrollToCoords={{ x: 0, y: 0 }}
       scrollEnabled={false}
-    >        
+    >     
         <Image 
           source={require('./assets/inter.png')}
           style={styles.logo}
@@ -53,8 +59,8 @@ export default function LoginScreen (props: LoginProps) {
           <TextInput
           placeholder='Digite sua senha'
           placeholderTextColor={'white'}
-          value={password}
-          onChangeText={setPassword}
+          value={senha}
+          onChangeText={setsenha}
           secureTextEntry
           style={{width: '80%'}}
         />
