@@ -1,41 +1,31 @@
-import 'react-native-gesture-handler';
 import * as React from 'react';
-import { router } from 'expo-router';
-import { auth } from '../config/firebase-config'
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-
-import { View, Text ,StyleSheet, Image, TextInput, TouchableOpacity, Button} from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {StyleSheet ,View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
+import { useRouter } from 'expo-router';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../config/firebase-config';
 
 export interface LoginProps {
 }
 
 
 export default function LoginScreen (props: LoginProps) {  
-  const [email, setEmail] = React.useState('');
-  const [senha, setsenha] = React.useState('');
-  
-  //cria um usuário usando email e senha
-createUserWithEmailAndPassword(auth, email, senha)
-          //Opcionalmente para saber se criou com sucesso
-          .then(usuario => console.log('usuario criado'))
-          //Opcionalmente para se falhou ao criar usuário
-          .catch(error => console.log('Não criou usuário'))
+  const [email, setEmail] = useState('');
+  const [senha, setsenha] = useState('');
+  const [error, setError] = useState('');
+  const router = useRouter();
 
-  const handleLogin = () => {
-    if (email === email && senha === '123') {
-      router.push('homepage');
-    } else {
-      alert('Falha no login!! \n' + 'E-mail ou senha incorretos');
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, senha);
+      router.push('/homepage');
+    } catch (err) {
+      setError(error);
     }
   };
 
   return (
-    <KeyboardAwareScrollView
-      contentContainerStyle={styles.container}
-      resetScrollToCoords={{ x: 0, y: 0 }}
-      scrollEnabled={false}
-    >     
+    <View style={styles.container}>     
         <Image 
           source={require('./assets/inter.png')}
           style={styles.logo}
@@ -69,11 +59,11 @@ createUserWithEmailAndPassword(auth, email, senha)
           <Text>Entrar</Text>
         </TouchableOpacity>
         
-        <TouchableOpacity style={styles.buttonCria}>
+        <TouchableOpacity style={styles.buttonCria} onPress={() => router.push('/cadastrar')}>
           <Text style={{fontWeight: 'bold'}}>Criar nova Conta</Text>
         </TouchableOpacity>      
-      </KeyboardAwareScrollView>  
-   );
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

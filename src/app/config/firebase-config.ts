@@ -1,6 +1,7 @@
 /** CONFIGURAÇÕES DE ACESSO AO FIREBASE */
 import { initializeApp } from "firebase/app";
-import { getAuth } from 'firebase/auth';
+import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCDB1o0CIa8YChshfZQDux82aKKWMJ8dOY",
@@ -13,5 +14,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth()
+const analytics = getAnalytics(app);
+
+export const auth = getAuth();
 
