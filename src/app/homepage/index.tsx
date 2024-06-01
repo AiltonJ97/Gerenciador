@@ -1,30 +1,30 @@
 import * as React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, TouchableOpacity } from 'react-native';
 import { StyleSheet, Text} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native';
-
+import  Feather  from 'react-native-vector-icons/Feather';
+import { router } from 'expo-router';
+import { useState } from 'react';
 export interface HomeProps {
 }
 
 export default function Home (props: HomeProps) {
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar 
         barStyle={'default'}
       />
-      <Text style={{fontSize: 30}}>Home</Text>
+      <Text style={{fontSize: 30, flexDirection: 'row'}}>Home
+      <TouchableOpacity onPress={() => router.replace('/criarDespesas')}>
+        <Feather name='plus-circle' size={30}/>
+      </TouchableOpacity>
+      </Text>
       <ScrollView style={styles.scrollView}>
-        <Text style={styles.texto}>1º Item</Text>
-        <Text style={styles.texto}>2º Item</Text>
-        <Text style={styles.texto}>3º Item</Text>
-        <Text style={styles.texto}>4º Item</Text>
-        <Text style={styles.texto}>5º Item</Text>
-        <Text style={styles.texto}>6º Item</Text>
-        <Text style={styles.texto}>7º Item</Text>
-        <Text style={styles.texto}>8º Item</Text>
-        <Text style={styles.texto}>9º Item</Text>
-        <Text style={styles.texto}>10º Item</Text>
+        <Text style={styles.texto}>
+          <Feather name='credit-card' color={'#83D53F'} size={25}/>
+          1º Item</Text>
       </ScrollView>
       </SafeAreaView>
   );
@@ -37,9 +37,8 @@ const styles = StyleSheet.create({
       backgroundColor: '#9CD53F'
     },
     texto: {
+        marginLeft: 5,
         marginTop: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
         fontSize: 25,
     },
     scrollView: {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet ,View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import {StyleSheet ,View, Text, TextInput, Image, TouchableOpacity, Alert } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -12,58 +12,54 @@ export interface LoginProps {
 export default function LoginScreen (props: LoginProps) {  
   const [email, setEmail] = useState('');
   const [senha, setsenha] = useState('');
-  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleLogin = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, email, senha);
-      router.push('/homepage');
-    } catch (err) {
-      setError(error);
-    }
-  };
+      await signInWithEmailAndPassword(auth, email, senha)
+      .then(usuario => router.replace('/homepage'))
+      .catch(erro => Alert.alert('Erro\n' + 'Login ou senha incorretos!!'))
+}
 
-  return (
-    <View style={styles.container}>     
-        <Image 
-          source={require('./assets/inter.png')}
-          style={styles.logo}
-        />
-        
-        <Text style={styles.titulo}>Seja Bem-Vindo</Text>
-        
-        <View style={styles.texto}>
-          <TextInput 
-            placeholder='Digite seu login'
-            placeholderTextColor={'white'}
-            value={email}
-            onChangeText={setEmail}
-            autoCapitalize='none'
-            keyboardType='email-address'
-            style={{width: '80%'}}
-          />
-        </View>
-        
-        <View style={styles.texto}>
-          <TextInput
-          placeholder='Digite sua senha'
+return (
+  <View style={styles.container}>     
+      <Image 
+        source={require('./assets/inter.png')}
+        style={styles.logo}
+      />
+      
+      <Text style={styles.titulo}>Seja Bem-Vindo</Text>
+      
+      <View style={styles.texto}>
+        <TextInput 
+          placeholder='Digite seu login'
           placeholderTextColor={'white'}
-          value={senha}
-          onChangeText={setsenha}
-          secureTextEntry
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize='none'
+          keyboardType='email-address'
           style={{width: '80%'}}
         />
-        </View>
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text>Entrar</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.buttonCria} onPress={() => router.push('/cadastrar')}>
-          <Text style={{fontWeight: 'bold'}}>Criar nova Conta</Text>
-        </TouchableOpacity>      
-        </View>
-    );
+      </View>
+      
+      <View style={styles.texto}>
+        <TextInput
+        placeholder='Digite sua senha'
+        placeholderTextColor={'white'}
+        value={senha}
+        onChangeText={setsenha}
+        secureTextEntry
+        style={{width: '80%'}}
+      />
+      </View>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text>Entrar</Text>
+      </TouchableOpacity>
+      
+      <TouchableOpacity style={styles.buttonCria} onPress={() => router.push('/cadastrar')}>
+        <Text style={{fontWeight: 'bold'}}>Criar nova Conta</Text>
+      </TouchableOpacity>      
+      </View>
+  );
 }
 
 const styles = StyleSheet.create({

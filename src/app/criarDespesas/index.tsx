@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import * as React from 'react';
 import { View, Text, StatusBar, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather'
@@ -10,9 +11,10 @@ export default function Criar (props: CriarProps) {
     <View style={styles.conteiner}>
       <StatusBar
         barStyle={'default'}
+        backgroundColor={'black'}
       />
       <View style={styles.top}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => router.replace('/homepage')}>
           <Feather name='arrow-left' size={30}/>
         </TouchableOpacity>
         <Text style={{fontSize: 30}}>Criar Despesas</Text>
@@ -33,7 +35,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: 'flex-start',
-        backgroundColor: '#9CD53F',
   },
   texto: {
     textAlign: 'center',
@@ -44,6 +45,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   top: {
+    marginTop: 22,
     backgroundColor: '#83D53F',
     alignItems: 'center',
     width:'100%',

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, StatusBar, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { useRouter } from 'expo-router';
+import { router } from 'expo-router';
 import { auth } from '../config/firebase-config'
 import { useState } from 'react';
 
@@ -9,24 +9,14 @@ export interface CadastroProps {
 }
 const [email, setEmail] = useState('');
 const [senha, setSenha] = useState('');
-const [confirmSenha, setConfirmSenha] = useState('');
-const [error, setError] = useState('');
-const router = useRouter();
 
 //Função do cadastro de usuário
-    const handleCadastro = async({email, senha}:any) => {
-        if (senha !== confirmSenha) {
-            setError('Senhas Diferentes');
-            return;
-        }
-        try {
-            await createUserWithEmailAndPassword(auth, email, senha);
-            router.push('/homepage');
-            } catch {
-            setError('Erro!');
-            }
-        };
-
+    const handleCadastro = ({email, senha}:any) => {
+            createUserWithEmailAndPassword(auth, email, senha)
+            .then(() => router.back())
+            .catch(erro => Alert.alert('Não criou o usuario'))
+    }
+    
 export default function Cadastro (props: CadastroProps) {
     
     return (
@@ -38,38 +28,22 @@ export default function Cadastro (props: CadastroProps) {
         <View style={styles.top}>
             <Text style={styles.texto1}>Cadastro</Text>
         </View>
-
         <View style={{width: '80%'}}>
-            <View style={styles.texto}>
-                <TextInput 
-                    placeholder='Digite seu login' 
-                    placeholderTextColor={'black'} 
-                    style={{fontSize: 20}}
-                    value={email}
-                    onChangeText={setEmail}
-                />
-            </View>
+            <TextInput
+                style={styles.input}
+                placeholder="Email"
+                value={email}
+                onChangeText={setEmail}
+            />
+            <TextInput 
+                placeholder='Digite sua senha' 
+                placeholderTextColor={'black'} 
+                style={styles.input}
+                secureTextEntry
+                value={senha}
+                onChangeText={setSenha}  
+            />
 
-            <View style={styles.texto}>
-                <TextInput 
-                    placeholder='Digite sua senha' 
-                    placeholderTextColor={'black'} 
-                    style={{fontSize: 20}}
-                    value={senha}
-                    onChangeText={setSenha}    
-                />
-            </View>
-
-            <View style={styles.texto}>
-                <TextInput 
-                    placeholder='Confirme senha' 
-                    placeholderTextColor={'black'} 
-                    style={{fontSize: 20}}
-                    value={confirmSenha}
-                    onChangeText={setConfirmSenha}
-                />
-            </View>
-            
             <TouchableOpacity style={styles.button} onPress={handleCadastro}>
                 <Text style={{fontWeight: '800', fontSize: 25}}>Cadastrar</Text>
             </TouchableOpacity>
@@ -114,5 +88,16 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 8, 
+    },
+    input: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        marginBottom: 12,
+        padding: 10,
+    },
+    error: {
+        color: 'red',
+        marginBottom: 12,
     },
 });
