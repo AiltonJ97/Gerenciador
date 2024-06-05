@@ -2,28 +2,44 @@ import { router } from 'expo-router';
 import * as React from 'react';
 import { View, Text, StatusBar, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather'
-
+import { useState } from 'react';
 export interface CriarProps {
 }
 
 export default function Criar (props: CriarProps) {
+  const [valor, setValor] = useState('') 
+  const [vencimento, setVencimento] = useState('')
+
   return (
     <View style={styles.conteiner}>
       <StatusBar
         barStyle={'default'}
         backgroundColor={'black'}
       />
+
       <View style={styles.top}>
         <TouchableOpacity onPress={() => router.replace('/homepage')}>
           <Feather name='arrow-left' size={30}/>
         </TouchableOpacity>
-        <Text style={{fontSize: 30}}>Criar Despesas</Text>
+        <Text style={{fontSize: 40}}>             Boleto</Text>
       </View>
-      <View>
-        <TextInput style={styles.input} placeholder='Valor R$0,00'/>
-        <TextInput style={styles.input} placeholder='Vencimento'/>
+
+      <View style={{width: '80%'}}>
+        <TextInput 
+          style={styles.input} 
+          placeholder='Valor R$0,00'
+          value={valor}
+          onChangeText={setValor}
+        />
+        <TextInput 
+          style={styles.input} 
+          placeholder='Vencimento'
+          
+          />
+
+
         <TouchableOpacity style={styles.button}>
-          <Text>Salvar</Text>
+          <Text style={{fontSize: 30}}>Salvar</Text>
         </TouchableOpacity>
       </View>  
     </View>
@@ -52,15 +68,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   input: {
-    justifyContent: 'center',
-    textDecorationLine: 'underline',
-    marginTop: 20,
-    fontSize: 20,
+    fontSize: 30,
+    marginTop: 35,
+    borderWidth: 3,
+    borderRadius: 12,
+    borderColor: "black",
+    padding: 6,
+    flexDirection: 'row',
   },
   button: {
-    alignItems: 'center',
-    width: 60,
-    borderRadius: 4
+    marginTop: 35,
+    backgroundColor: "#83D53F",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 8,
   },
   
 });

@@ -7,17 +7,17 @@ import { useState } from 'react';
 
 export interface CadastroProps {
 }
-const [email, setEmail] = useState('');
-const [senha, setSenha] = useState('');
 
-//Função do cadastro de usuário
-    const handleCadastro = ({email, senha}:any) => {
-            createUserWithEmailAndPassword(auth, email, senha)
-            .then(() => router.back())
-            .catch(erro => Alert.alert('Não criou o usuario'))
-    }
-    
 export default function Cadastro (props: CadastroProps) {
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    
+    //Função do cadastro de usuário
+        const handleCadastro = async () => {
+               await createUserWithEmailAndPassword(auth, email, senha)
+                .then(() => router.back())
+                .catch(erro => Alert.alert('Não criou o usuario'))
+        }
     
     return (
       <View style={styles.conteiner}>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet ,View, Text, TextInput, Image, TouchableOpacity, Alert } from 'react-native';
+import {StyleSheet ,View, Text, TextInput, Image, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -21,43 +21,46 @@ export default function LoginScreen (props: LoginProps) {
 }
 
 return (
-  <View style={styles.container}>     
-      <Image 
-        source={require('./assets/inter.png')}
-        style={styles.logo}
-      />
-      
-      <Text style={styles.titulo}>Seja Bem-Vindo</Text>
-      
-      <View style={styles.texto}>
-        <TextInput 
-          placeholder='Digite seu login'
+  <View style={styles.container}>
+    <ScrollView style={{width: '100%'}} contentContainerStyle={{alignItems: 'center', width: '100%'}}  >
+        
+        <Image 
+          source={require('./assets/inter.png')}
+          style={styles.logo}
+          />
+        
+        <Text style={styles.titulo}>Seja Bem-Vindo</Text>
+        
+        <View style={styles.texto}>
+          <TextInput 
+            placeholder='Digite seu login'
+            placeholderTextColor={'white'}
+            value={email}
+            onChangeText={setEmail}
+            autoCapitalize='none'
+            keyboardType='email-address'
+            style={{width: '80%'}}
+          />
+        </View>
+        
+        <View style={styles.texto}>
+          <TextInput
+          placeholder='Digite sua senha'
           placeholderTextColor={'white'}
-          value={email}
-          onChangeText={setEmail}
-          autoCapitalize='none'
-          keyboardType='email-address'
+          value={senha}
+          onChangeText={setsenha}
+          secureTextEntry
           style={{width: '80%'}}
-        />
-      </View>
-      
-      <View style={styles.texto}>
-        <TextInput
-        placeholder='Digite sua senha'
-        placeholderTextColor={'white'}
-        value={senha}
-        onChangeText={setsenha}
-        secureTextEntry
-        style={{width: '80%'}}
-      />
-      </View>
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text>Entrar</Text>
-      </TouchableOpacity>
-      
-      <TouchableOpacity style={styles.buttonCria} onPress={() => router.push('/cadastrar')}>
-        <Text style={{fontWeight: 'bold'}}>Criar nova Conta</Text>
-      </TouchableOpacity>      
+          />
+        </View>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text>Entrar</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity style={styles.buttonCria} onPress={() => router.push('/cadastrar')}>
+          <Text style={{fontWeight: 'bold'}}>Criar nova Conta</Text>
+        </TouchableOpacity> 
+        </ScrollView>     
       </View>
   );
 }

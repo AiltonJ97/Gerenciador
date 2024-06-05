@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StatusBar, TouchableOpacity } from 'react-native';
+import { StatusBar, TouchableOpacity, View } from 'react-native';
 import { StyleSheet, Text} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native';
@@ -15,12 +15,16 @@ export default function Home (props: HomeProps) {
     <SafeAreaView style={styles.container}>
       <StatusBar 
         barStyle={'default'}
+        backgroundColor={'black'}
       />
-      <Text style={{fontSize: 30, flexDirection: 'row'}}>Home
-      <TouchableOpacity onPress={() => router.replace('/criarDespesas')}>
-        <Feather name='plus-circle' size={30}/>
-      </TouchableOpacity>
-      </Text>
+      
+      <View style={styles.top}>
+        <TouchableOpacity onPress={() => router.replace('/criarDespesas')}>
+          <Feather name='plus-circle' size={30}/>
+        </TouchableOpacity>
+        <Text style={{fontSize: 30}}>                 Home</Text>
+      </View>
+
       <ScrollView style={styles.scrollView}>
         <Text style={styles.texto}>
           <Feather name='credit-card' color={'#83D53F'} size={25}/>
@@ -35,6 +39,12 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'flex-start',
       backgroundColor: '#9CD53F'
+    },
+    top: {
+      marginTop: 10,
+      backgroundColor: '#83D53F',
+      width:'100%',
+      flexDirection: 'row'
     },
     texto: {
         marginLeft: 5,
