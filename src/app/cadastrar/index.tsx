@@ -26,9 +26,9 @@ export default function Cadastro (props: CadastroProps) {
         />
 
         <View style={styles.top}>
-            <Text style={styles.texto1}>Cadastro</Text>
+            <Text style={{fontSize: 30, marginTop: 20}}>Cadastro</Text>
         </View>
-        <View style={{width: '80%'}}>
+        <View style={{width: '80%', marginTop: 30}}>
             <TextInput
                 style={styles.input}
                 placeholder="Email"
@@ -45,7 +45,7 @@ export default function Cadastro (props: CadastroProps) {
             />
 
             <TouchableOpacity style={styles.button} onPress={handleCadastro}>
-                <Text style={{fontWeight: '800', fontSize: 25}}>Cadastrar</Text>
+                <Text style={{fontWeight: '800', fontSize: 30}}>Cadastrar</Text>
             </TouchableOpacity>
         </View>
       </View>
@@ -58,10 +58,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     top: {
-       marginTop: 10, 
-       backgroundColor: 'white',
-       width:'100%',
-       marginBottom: 60,
+        backgroundColor: '#83D53F',
+        width: '100%', 
+        alignItems:'center'
     },
     texto:{
         marginBottom: 15,
@@ -73,28 +72,21 @@ const styles = StyleSheet.create({
         width:"100%",
         flexDirection: 'row',
     },
-    texto1: {
-       backgroundColor:'#9CD53F',
-       fontSize: 30,
-       width: '100%',
-       fontWeight: '600',
-       textAlign: 'center'
-    },
     button: {
-        marginTop: 14,
+        marginTop: 35,
         backgroundColor: "#83D53F",
-        width: "100%",
-        height: 40,
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: 8, 
+        borderRadius: 8,
     },
     input: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 12,
-        padding: 10,
+        fontSize: 30,
+        marginTop: 20,
+        borderWidth: 3,
+        borderRadius: 12,
+        borderColor: "black",
+        padding: 6,
+        flexDirection: 'row',
     },
     error: {
         color: 'red',

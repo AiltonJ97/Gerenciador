@@ -27,7 +27,7 @@ export default function Escolha (props: EscolhaProps) {
             </TouchableOpacity>
             <TouchableOpacity 
                 style={styles.button}
-                onPress={() => router.back()}>
+                onPress={() => router.replace('/desMensais')}>
                 <Text style={{fontSize: 30,}}>Despesas Mensais</Text>
             </TouchableOpacity>
             <TouchableOpacity 

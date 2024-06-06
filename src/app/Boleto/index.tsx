@@ -18,10 +18,7 @@ export default function Criar (props: CriarProps) {
       />
 
       <View style={styles.top}>
-        <TouchableOpacity onPress={() => router.replace('/homepage')}>
-          <Feather name='arrow-left' size={30}/>
-        </TouchableOpacity>
-        <Text style={{fontSize: 40}}>             Boleto</Text>
+        <Text style={{fontSize: 30, marginTop: 20}}>Boleto</Text>
       </View>
 
       <View style={{width: '80%'}}>
@@ -61,11 +58,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   top: {
-    marginTop: 22,
-    backgroundColor: '#83D53F',
-    alignItems: 'center',
-    width:'100%',
-    flexDirection: 'row'
+    backgroundColor: '#83D53F', 
+    width: '100%', 
+    alignItems:'center'
   },
   input: {
     fontSize: 30,
