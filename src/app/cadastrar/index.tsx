@@ -9,6 +9,7 @@ export interface CadastroProps {
 }
 
 export default function Cadastro (props: CadastroProps) {
+    const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     
@@ -28,13 +29,21 @@ export default function Cadastro (props: CadastroProps) {
         <View style={styles.top}>
             <Text style={{fontSize: 30, marginTop: 20}}>Cadastro</Text>
         </View>
-        <View style={{width: '80%', marginTop: 30}}>
+        <View style={{width: '90%', marginTop: 30}}>
+            <TextInput
+                style={styles.input}
+                placeholder="Nome"
+                value={nome}
+                onChangeText={setNome}
+            />
+
             <TextInput
                 style={styles.input}
                 placeholder="Email"
                 value={email}
                 onChangeText={setEmail}
             />
+            
             <TextInput 
                 placeholder='Digite sua senha' 
                 placeholderTextColor={'black'} 

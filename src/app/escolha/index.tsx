@@ -15,8 +15,11 @@ export default function Escolha (props: EscolhaProps) {
           backgroundColor={'black'}
         />
 
-        <View style={{backgroundColor: '#83D53F', width: '100%', alignItems:'center'}}>
-            <Text style={{fontSize: 30, marginTop: 20}}>Tipo de Despesa</Text>
+        <View style={styles.top}>
+            <TouchableOpacity onPress={() => router.replace('/homepage')}>
+                <Feather name='arrow-left' size={30}/>
+            </TouchableOpacity>
+            <Text style={{fontSize: 30}}>       Tipo de Despesa</Text>
         </View>
 
         <View style={{width: '100%', alignItems: 'center'}}>
@@ -44,6 +47,12 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: 'flex-start',
+  },
+  top: {
+      marginTop: 24,
+      backgroundColor: '#83D53F',
+      width:'100%',
+      flexDirection: 'row'
   },
   button: {
     backgroundColor: '#83D53F',

@@ -3,12 +3,16 @@ import * as React from 'react';
 import { View, Text, StatusBar, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather'
 import { useState } from 'react';
+import { db } from '../config/firebase-config';
+import { doc, collection, setDoc, addDoc } from '@firebase/firestore';
+
 export interface CriarProps {
 }
 
 export default function Criar (props: CriarProps) {
   const [valor, setValor] = useState('') 
   const [vencimento, setVencimento] = useState('')
+  
 
   return (
     <View style={styles.conteiner}>
@@ -18,11 +22,14 @@ export default function Criar (props: CriarProps) {
       />
 
       <View style={styles.top}>
-        <Text style={{fontSize: 30, marginTop: 20}}>Boleto</Text>
+        <TouchableOpacity onPress={() => router.replace('/escolha')}>
+          <Feather name='arrow-left' size={30}/>
+        </TouchableOpacity>
+        <Text style={{fontSize: 30}}>                 Boleto</Text>
       </View>
 
       <View style={{width: '80%'}}>
-        <TextInput 
+        <TextInput
           style={styles.input} 
           placeholder='Valor R$0,00'
           value={valor}
@@ -31,11 +38,17 @@ export default function Criar (props: CriarProps) {
         <TextInput 
           style={styles.input} 
           placeholder='Vencimento'
-          
-          />
+          value={vencimento}
+          onChangeText={setVencimento}
+        />
 
-
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => {
+          const Valores = addDoc(collection(db, 'Valores'),{
+            Valor: {valor},
+            Vencimento: {vencimento}
+          })
+        }
+        }>
           <Text style={{fontSize: 30}}>Salvar</Text>
         </TouchableOpacity>
       </View>  
@@ -58,9 +71,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   top: {
-    backgroundColor: '#83D53F', 
-    width: '100%', 
-    alignItems:'center'
+      marginTop: 24,
+      backgroundColor: '#83D53F',
+      width:'100%',
+      flexDirection: 'row'
   },
   input: {
     fontSize: 30,
@@ -77,6 +91,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 8,
+  },
+  status: {
+    marginTop: 20,
+    textAlign: 'center',
+    color: 'green',
   },
   
 });
