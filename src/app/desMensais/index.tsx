@@ -17,11 +17,14 @@ export default function Mensais (props: MensaisProps) {
           barStyle={'default'}
           backgroundColor={'black'}
         />
-         <View style={{backgroundColor: '#83D53F', width: '100%', alignItems:'center'}}>
+        <View style={{backgroundColor: '#83D53F', width: '100%', alignItems:'center'}}>
             <Text style={{fontSize: 30, marginTop: 20}}>Mensais</Text>
         </View>
 
         <View style={{width: '80%'}}>
+        <TouchableOpacity onPress={() => router.replace('/escolha')}>
+            <Feather name='arrow-left' size={30}/>
+          </TouchableOpacity>
         <TextInput 
           style={styles.input} 
           placeholder='Nome'
