@@ -15,13 +15,6 @@ export default function Escolha (props: EscolhaProps) {
           backgroundColor={'black'}
         />
 
-        <View style={styles.top}>
-            <TouchableOpacity onPress={() => router.replace('/homepage')}>
-                <Feather name='arrow-left' size={30}/>
-            </TouchableOpacity>
-            <Text style={{fontSize: 30}}>       Tipo de Despesa</Text>
-        </View>
-
         <View style={{width: '100%', alignItems: 'center'}}>
             <TouchableOpacity 
                 style={styles.button}
@@ -32,11 +25,6 @@ export default function Escolha (props: EscolhaProps) {
                 style={styles.button}
                 onPress={() => router.replace('/desMensais')}>
                 <Text style={{fontSize: 30,}}>Despesas Mensais</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-                style={styles.button}
-                onPress={() => router.back()}>
-                <Text style={{fontSize: 30,}}>Renda</Text>
             </TouchableOpacity>
         </View>
       </View>

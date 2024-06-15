@@ -20,14 +20,6 @@ export default function Criar (props: CriarProps) {
         barStyle={'default'}
         backgroundColor={'black'}
       />
-
-      <View style={styles.top}>
-        <TouchableOpacity onPress={() => router.replace('/escolha')}>
-          <Feather name='arrow-left' size={30}/>
-        </TouchableOpacity>
-        <Text style={{fontSize: 30}}>                 Boleto</Text>
-      </View>
-
       <View style={{width: '80%'}}>
         <TextInput
           style={styles.input} 
@@ -43,10 +35,12 @@ export default function Criar (props: CriarProps) {
         />
 
         <TouchableOpacity style={styles.button} onPress={() => {
-          const Valores = addDoc(collection(db, 'Valores'),{
+          addDoc(collection(db, 'Valores'), {
             Valor: {valor},
             Vencimento: {vencimento}
           })
+          setValor('')
+          setVencimento('')
         }
         }>
           <Text style={{fontSize: 30}}>Salvar</Text>
@@ -61,20 +55,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: 'flex-start',
-  },
-  texto: {
-    textAlign: 'center',
-    backgroundColor:'#83D53F',
-    fontSize: 30,
-    width: '100%',
-    fontWeight: '600',
-    alignItems: 'center',
-  },
-  top: {
-      marginTop: 24,
-      backgroundColor: '#83D53F',
-      width:'100%',
-      flexDirection: 'row'
   },
   input: {
     fontSize: 30,
@@ -92,10 +72,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 8,
   },
-  status: {
-    marginTop: 20,
-    textAlign: 'center',
-    color: 'green',
-  },
-  
 });

@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, StatusBar, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { router } from 'expo-router';
-import { auth } from '../config/firebase-config'
+import { auth, db } from '../config/firebase-config'
 import { useState } from 'react';
+import { doc, collection, setDoc, addDoc} from '@firebase/firestore'
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export interface CadastroProps {
 }
@@ -14,20 +16,33 @@ export default function Cadastro (props: CadastroProps) {
     const [senha, setSenha] = useState('');
     
     //Função do cadastro de usuário
-        const handleCadastro = async () => {
-               await createUserWithEmailAndPassword(auth, email, senha)
-                .then(() => router.back())
-                .catch(erro => Alert.alert('Não criou o usuario'))
+    const handleCadastro = async () => {
+        try {
+            await createUserWithEmailAndPassword(auth, email, senha);
+            router.back();
+            const User = doc(collection(db, 'Usuarios'))
+            if (User){
+                setDoc(User, {
+                    id: User.id,
+                    Nome: {nome},
+                    Email :{email}
+                })
+            }
         }
-    
+        catch {
+            (Alert.alert('Não criou o usuario'))
+        }
+    }
+
     return (
-      <View style={styles.conteiner}>
+    <View style={styles.conteiner}>
+      <ScrollView style={{width: '100%'}} contentContainerStyle={{alignItems: 'center', width: '100%'}}>
         <StatusBar
-            barStyle={'light-content'}
+            barStyle={'dark-content'}
         />
 
         <View style={styles.top}>
-            <Text style={{fontSize: 30, marginTop: 20}}>Cadastro</Text>
+            <Text style={{fontSize: 30}}>Cadastro</Text>
         </View>
         <View style={{width: '90%', marginTop: 30}}>
             <TextInput
@@ -57,14 +72,17 @@ export default function Cadastro (props: CadastroProps) {
                 <Text style={{fontWeight: '800', fontSize: 30}}>Cadastrar</Text>
             </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
+    </View>
     );
 }
+
 
 const styles = StyleSheet.create({
     conteiner:{
         flex: 1,
         alignItems: "center",
+        marginTop: StatusBar.currentHeight
     },
     top: {
         backgroundColor: '#83D53F',

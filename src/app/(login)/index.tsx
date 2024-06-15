@@ -4,23 +4,26 @@ import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firebase-config';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export interface LoginProps {
 }
 
 
-export default function LoginScreen (props: LoginProps) {  
+export default function LoginScreen (props: LoginProps) { 
+   
   const [email, setEmail] = useState('');
   const [senha, setsenha] = useState('');
   const router = useRouter();
 
   const handleLogin = async () => {
       await signInWithEmailAndPassword(auth, email, senha)
-      .then(usuario => router.replace('/homepage'))
+      .then(usuario => router.replace('drawer/homepage'))
       .catch(erro => Alert.alert('Erro\n' + 'Login ou senha incorretos!!'))
 }
 
 return (
+  <GestureHandlerRootView>
   <View style={styles.container}>
     <ScrollView style={{width: '100%'}} contentContainerStyle={{alignItems: 'center', width: '100%'}}  >
         
@@ -62,6 +65,7 @@ return (
         </TouchableOpacity> 
         </ScrollView>     
       </View>
+      </GestureHandlerRootView>
   );
 }
 

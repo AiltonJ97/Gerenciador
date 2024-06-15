@@ -1,8 +1,11 @@
 import { router } from 'expo-router';
 import * as React from 'react';
-import { View, Text, StatusBar, StyleSheet, TextInput, TouchableOpacity, Button } from 'react-native';
+import { View, Text, StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather'
 import { useState } from 'react';
+import { Input, Button } from '@rneui/base';
+import {setDoc, doc, collection} from '@firebase/firestore';
+import { db } from '../config/firebase-config';
 
 export interface MensaisProps {
 }
@@ -17,33 +20,39 @@ export default function Mensais (props: MensaisProps) {
           barStyle={'default'}
           backgroundColor={'black'}
         />
-        <View style={{backgroundColor: '#83D53F', width: '100%', alignItems:'center'}}>
-            <Text style={{fontSize: 30, marginTop: 20}}>Mensais</Text>
-        </View>
 
         <View style={{width: '80%'}}>
-        <TouchableOpacity onPress={() => router.replace('/escolha')}>
-            <Feather name='arrow-left' size={30}/>
-          </TouchableOpacity>
-        <TextInput 
-          style={styles.input} 
-          placeholder='Nome'
-          value={nome}
-          onChangeText={setNome}
-        />
+          <Input
+            label='Tipo'
+            style={styles.input}
+            placeholder='Tipo'
+            value={nome}
+            onChangeText={setNome}
+            onPress={() => {
+              const Mensais = doc(collection(db, 'Mensais'))
+              setDoc(Mensais, {
+                Tipo: {nome},
+                Valor: {valor}
+              })
+            }}
+          />
 
-        <TextInput 
-          style={styles.input} 
-          placeholder='Valor'
-          value={valor}
-          onChangeText={setValor}
-        />
+          <Input
+            label='Valor'
+            style={styles.input} 
+            placeholder='Valor'
+            value={valor}
+            onChangeText={setValor}
+          />
 
-
-        <TouchableOpacity style={styles.button}>
-          <Text style={{fontSize: 30}}>Salvar</Text>
-        </TouchableOpacity>
-      </View>
+          <Button
+            title='Salvar'
+            buttonStyle={styles.button}
+            type='clear'
+            icon={<Feather name='plus' size={20}/>}
+            titleStyle={{fontSize: 20, color:'black'}}
+          />
+        </View>
       </View>
     );
 }
@@ -53,22 +62,21 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: 'flex-start',
+        marginTop: StatusBar.currentHeight
     },
     input: {
-        fontSize: 30,
-        marginTop: 35,
+        fontSize: 25,
         borderWidth: 3,
-        borderRadius: 12,
-        borderColor: "black",
-        padding: 6,
+        borderRadius: 6,
+        textAlign: 'center',
         flexDirection: 'row',
+        alignItems: 'center'
     },
     button: {
-        marginTop: 35,
+        marginTop: 20,
         backgroundColor: "#83D53F",
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: 8,
+        borderRadius: 30,
     },
-      
 });
