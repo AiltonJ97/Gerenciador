@@ -38,12 +38,9 @@ export default function Cadastro (props: CadastroProps) {
     <View style={styles.conteiner}>
       <ScrollView style={{width: '100%'}} contentContainerStyle={{alignItems: 'center', width: '100%'}}>
         <StatusBar
-            barStyle={'dark-content'}
+            barStyle={'default'}
+            backgroundColor={'black'}
         />
-
-        <View style={styles.top}>
-            <Text style={{fontSize: 30}}>Cadastro</Text>
-        </View>
         <View style={{width: '90%', marginTop: 30}}>
             <TextInput
                 style={styles.input}

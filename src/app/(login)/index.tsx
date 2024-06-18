@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet ,View, Text, TextInput, Image, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import {StyleSheet ,View, Text, TextInput, Image, TouchableOpacity, Alert, ScrollView, Vibration } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -20,6 +20,10 @@ export default function LoginScreen (props: LoginProps) {
       await signInWithEmailAndPassword(auth, email, senha)
       .then(usuario => router.replace('drawer/homepage'))
       .catch(erro => Alert.alert('Erro\n' + 'Login ou senha incorretos!!'))
+      Vibration.vibrate([
+        1000, //espera por 1seg 
+        3000, //vibra por 3seg
+     ]);
 }
 
 return (

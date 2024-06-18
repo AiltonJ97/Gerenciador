@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import * as React from 'react';
-import { View, Text, StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StatusBar, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather'
 import { useState } from 'react';
 import { Input, Button } from '@rneui/base';
@@ -28,13 +28,6 @@ export default function Mensais (props: MensaisProps) {
             placeholder='Tipo'
             value={nome}
             onChangeText={setNome}
-            onPress={() => {
-              const Mensais = doc(collection(db, 'Mensais'))
-              setDoc(Mensais, {
-                Tipo: {nome},
-                Valor: {valor}
-              })
-            }}
           />
 
           <Input
@@ -46,10 +39,17 @@ export default function Mensais (props: MensaisProps) {
           />
 
           <Button
+            onPress={() => {
+              const Mensais = doc(collection(db, 'Mensais'))
+              setDoc(Mensais, {
+                Tipo: {nome},
+                Valor: {valor}
+              })
+              Alert.alert('Adicionado')
+            }}
             title='Salvar'
             buttonStyle={styles.button}
             type='clear'
-            icon={<Feather name='plus' size={20}/>}
             titleStyle={{fontSize: 20, color:'black'}}
           />
         </View>

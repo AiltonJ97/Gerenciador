@@ -3,6 +3,7 @@ import LoginScreen from './(login)';
 import { Drawer } from 'expo-router/drawer';
 import { TouchableOpacity ,StyleSheet } from 'react-native';
 import Awesome from 'react-native-vector-icons/FontAwesome6'
+import Cadastro from './cadastrar';
 
 export default function Layout() {
   return (
@@ -21,6 +22,11 @@ export default function Layout() {
         </TouchableOpacity>)
       }}/>
       <Stack.Screen name='drawer' options={{headerShown: false}}/>
+      <Stack.Screen name='cadastrar/index' options={{headerTitle: 'Cadastro', headerTitleStyle: {fontSize: 25} ,headerLeft: () => (
+        <TouchableOpacity style={styles.Button} onPress={() => router.replace('/(login)')}>
+          <Awesome name='arrow-left' size={30}/>
+        </TouchableOpacity>)}}/>
+      <Stack.Screen name='(login)/index' options={{headerShown: false}}/>
     </Stack> 
   );
 }

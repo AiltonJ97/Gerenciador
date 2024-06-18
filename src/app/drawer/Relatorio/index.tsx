@@ -1,9 +1,5 @@
 import * as React from 'react';
-import { StatusBar, TouchableOpacity, View, } from 'react-native';
-import { StyleSheet, Text} from 'react-native';
-import { ScrollView } from 'react-native';
-import  Feather  from 'react-native-vector-icons/Feather';
-import { router } from 'expo-router';
+import { Share, TouchableOpacity, View, StyleSheet, Text, ScrollView} from 'react-native';
 import { doc, collection, getDocs, getDoc } from '@firebase/firestore'
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { db } from '../../config/firebase-config';
@@ -14,7 +10,6 @@ export interface RelatorioProps {
 }
 
 export default function Relatorio (props: RelatorioProps) {
-  
   const [valor, setValor] = useState<any[]>([]);
   
   const handlerBuscar = async () => {
@@ -26,11 +21,11 @@ export default function Relatorio (props: RelatorioProps) {
     });
     
     setValor(dados);
+
   }
 
   useEffect(() => {
     handlerBuscar();
-
   }, []);
 
   return (

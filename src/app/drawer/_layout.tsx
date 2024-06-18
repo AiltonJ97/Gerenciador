@@ -19,7 +19,7 @@ function DrawerNavigator() {
         <Drawer.Screen name='Home' component={Home} options={{drawerIcon:() => <Awesome name='house'/>, 
         headerRight: () => (
           <TouchableOpacity style={styles.Button} onPress={() => router.replace('../escolha')}>
-            <Awesome name='plus' size={25}/>
+            <Awesome name='plus' size={25} color={'white'}/>
           </TouchableOpacity>) }}/>
         <Drawer.Screen name="Relatorio" component={Relatorio} options={{drawerIcon: () => <Awesome name='file'/>}}/>
         <Drawer.Screen name='Saldo' component={Saldo} options={{drawerIcon: () => <Awesome name='brazilian-real-sign'/>}}/>
@@ -32,7 +32,7 @@ function DrawerNavigator() {
 const styles = StyleSheet.create({
   Button:{
     marginRight: 10,
-    backgroundColor: 'blue',
+    backgroundColor: 'gray',
     borderRadius: 30,
     width: 35,
     height: 35,
